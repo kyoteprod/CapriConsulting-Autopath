@@ -6,18 +6,29 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
+    private int Random;
+    private String[] Questions;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.Questions = {
+		    "MainActivity2"
+	    };
+	    Random r = new Random();
+	    this.Random = r.nextInt(this.Questions.Length-1) + 1;
     }
 
-    public void testMe(){
-        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
-        dlgAlert.setMessage("This is an alert with no consequence");
-        dlgAlert.setTitle("App Title");
-        dlgAlert.setPositiveButton("OK", null);
-        dlgAlert.setCancelable(true);
-        dlgAlert.create().show();
+    public void loadRandomQuestion() {
+	    Intent intent = new Intent(this, this.Questions[this.Random].class);
+	    String[] questionsUpdated = new String[this.Questions.Length -1];
+	    for(int i = 0; i <= this.Questions; i++) {
+	    	if(i != this.Random) {
+			    questionsUpdated[i] = this.Questions[i];
+		    }
+	    }
+	    intent.putExtra(EXTRA_QUESTIONS, questionsUpdated);
+	    startActivity();
     }
 }
