@@ -1,34 +1,29 @@
 package capri.capritestapplication;
 
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
-    private int Random;
-    private String[] Questions;
-    
+    private java.util.Random Random;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.Questions = {
-		    "MainActivity2"
-	    };
-	    Random r = new Random();
-	    this.Random = r.nextInt(this.Questions.Length-1) + 1;
     }
 
     public void loadRandomQuestion() {
-	    Intent intent = new Intent(this, this.Questions[this.Random].class);
-	    String[] questionsUpdated = new String[this.Questions.Length -1];
-	    for(int i = 0; i <= this.Questions; i++) {
-	    	if(i != this.Random) {
-			    questionsUpdated[i] = this.Questions[i];
-		    }
-	    }
-	    intent.putExtra(EXTRA_QUESTIONS, questionsUpdated);
-	    startActivity();
+        Intent[] Questions = {
+                new Intent(this, MainActivity2.class)
+        };
+        int r = this.Random.nextInt(Questions.length-1) +1;
+        Intent intent = Questions[r];
+        
+        startActivity(intent);
     }
 }
